@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>C++ WASM Demo</title>
+</head>
+<body>
+    <div id="lerp1">
+      Here is the result = 
+    </div>
+
+    <div id="lerp2">
+    </div>
+
+</body>
+    
+<script src="bin/myclass.js"></script>
+<script>
+ var Module = {
+      onRuntimeInitialized: function() {
+        console.log("herexxx");
+        var myObj = new Module.MyClass(10, "hello Ahmad == ");
+        // myObj.incrementX(); //11
+
+        // var str = Module.MyClass.getStringFromInstance(myObj); // "hello"
+        // var tag1 = document.getElementById("lerp1");
+        // tag1.innerHTML = str + instance.x;
+
+        // instance.x = 20; // 20
+        // var tag2 = document.getElementById("lerp2");
+        // tag2.innerHTML = str + instance.x;
+        // myObj.delete();
+        
+      }
+  };
+</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!doctype html>
+<html>
+<body>
+	<div id="lerp1">
+		Here is the result = 
+	</div>
+
+	<div id="lerp">
+	</div>
+
+</body>
+<script>
+    var Module = {
+        onRuntimeInitialized: function() {
+        	var v = Module.lerp(1, 2, 0.5);
+            console.log('lerp result: ' + v);
+            var tag = document.getElementById("lerp");
+        	tag.innerHTML = v;
+        }
+    };
+</script>
+<script src="bin/lerp.js"></script>
+</html>
