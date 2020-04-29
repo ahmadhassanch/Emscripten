@@ -1,9 +1,10 @@
-
-#include <emscripten/bind.h>
-using namespace emscripten;
-
+#include <iostream>
 #include <string>
 using namespace std;
+#include <emscripten/bind.h>
+
+using namespace emscripten;
+
 
 class MyClass {
 public:

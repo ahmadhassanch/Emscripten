@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>C++ WASM Demo</title>
+</head>
+<body>
+    <div id="lerp1">
+      Here is the result = 
+    </div>
+
+    <div id="lerp2">
+    </div>
+
+</body>
+    
+<script src="bin/arrays.js"></script>
+<script>
+
+// Module.addOnPostRun(() => {
+//   var person = Module.findPersonAtLocation([10.2, 156.5]);
+//   console.log('Found someone! Their name is ' + person.name + ' and they are ' + person.age + ' years old');
+//   person.delete();
+// })
+
+    var Module = {
+        onRuntimeInitialized: function() {
+         var person = Module.findPersonAtLocation([10.2, 156.5]);
+          console.log('Found someone! Their name is ' + person.name + ' and they are ' + person.age + ' years old');
+          person.delete();
+        }
+    };
+
+</script>
+</html>
