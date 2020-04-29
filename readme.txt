@@ -1,4 +1,13 @@
-addOnPostRun works in CPP files and onRuntimeInitialized gives issues
+
+Question'
+===========
+- We want that we don't need to change any C code
+- we want to call the functions/ classes directly without using Module.
+
+CONFIRM THE FOLLOWING:
+======================
+- Uptil now we are using small C code so that can be loaded in main thread. Later we will use web workers.
+
 
 
 https://medium.com/@tdeniffel/pragmatic-compiling-from-c-to-webassembly-a-guide-a496cc5954b8
@@ -24,12 +33,9 @@ WebAssembly is a binary format for executing code on the web, allowing fast star
 We should generate both JS and WASM, this is better. If we want only JS, we can do -s WASM=0. This is slower.
 REf: https://emscripten.org/docs/getting_started/Tutorial.html
 
-Older node.js versions do not have WebAssembly support yet. In that case you will see an error message suggesting that you build with -s WASM=0 to disable WebAssembly, and then emscripten will emit the compiled code as JavaScript. In general, WebAssembly is recommended as it has widespread browser support and is more efficient both to execute and to download (and therefore emscripten emits it by default), but sometimes you may need your code to run in an environment where it is not yet present and so should disable it.
-
 
 SETTING UP
 ===============
-
 https://webassembly.org/getting-started/developers-guide/
 
 To conveniently access the selected set of tools from the command line, consider adding the following directories to PATH, or call 'source ./emsdk_env.sh' to do this for you.

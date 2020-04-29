@@ -19,21 +19,24 @@
 <script src="bin/myclass.js"></script>
 <script>
 
-    Module.addOnPostRun(() => {
-        var myObj = new Module.MyClass(10, "hello Ahmad == ");
-        var myObj = new Module.MyClass(10, "hello Ahmad == ");
-        myObj.incrementX(); //11
+function start()
+{
+  var myObj = new Module.MyClass(10, "hello Ahmad == ");
+  var myObj = new Module.MyClass(10, "hello Ahmad == ");
+  myObj.incrementX(); //11
 
-        var str = Module.MyClass.getStringFromInstance(myObj); // "hello"
-        var tag1 = document.getElementById("lerp1");
-        tag1.innerHTML = str + myObj.x;
+  var str = Module.MyClass.getStringFromInstance(myObj); // "hello"
+  var tag1 = document.getElementById("lerp1");
+  tag1.innerHTML = str + myObj.x;
 
-        myObj.x = 20; // 20
-        var tag2 = document.getElementById("lerp2");
-        tag2.innerHTML = str + myObj.x;
-        myObj.delete();
-    })
-
+  myObj.x = 20; // 20
+  var tag2 = document.getElementById("lerp2");
+  tag2.innerHTML = str + myObj.x;
+  myObj.delete();
+}
+    
+// Module.addOnPostRun(start);   //both work.
+var Module = {onRuntimeInitialized: start};
     
 </script>
 </html>
