@@ -11,14 +11,16 @@
 
 </body>
 <script>
-    var Module = {
-        onRuntimeInitialized: function() {
-        	var v = Module.lerp(1, 2, 0.5);
-            console.log('lerp result: ' + v);
-            var tag = document.getElementById("lerp");
-        	tag.innerHTML = v;
-        }
-    };
+
+function start(){
+    var v = Module.lerp(1, 2, 0.5);
+    console.log('lerp result: ' + v);
+    var tag = document.getElementById("lerp");
+    tag.innerHTML = v;
+}
+
+var Module = {onRuntimeInitialized: start};
+
 </script>
 <script src="bin/lerp.js"></script>
 </html>

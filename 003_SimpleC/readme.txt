@@ -18,3 +18,21 @@
 		EMSCRIPTEN_BINDINGS(my_module) {  -----------------------------
 		    function("lerp", &lerp);      -----------------------------
 		}
+
+emcc --bind lerp.cpp -o bin/lerp.js
+we can run the index.html file of this directory
+
+Note that we need to add the following line:
+- var Module = {onRuntimeInitialized: start};
+- and the start function can now use the module functions (which were exported via EMSCRIPTEN_BINDINGS)
+
+
+CONFIRM THE FOLLOWING:
+======================
+- Uptil now we are using small C code so that can be loaded in main thread. Later we will use web workers.
+
+
+Question'
+===========
+- We want that we don't need to change any C code
+- we want to call the functions/ classes directly without using Module.
