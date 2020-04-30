@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <script>
+
+
+function _arrayToHeap(typedArray){
+  var numBytes = typedArray.byteLength;
+  var ptr = Module._malloc(numBytes);
+  // var heapBytes = Module.HEAPU8.subarray(ptr, ptr + numBytes);
+  // heapBytes.set(typedArray);
+  var heapBytes = Module.HEAPU8.subarray(ptr, ptr + numBytes);
+  heapBytes.set(new Uint8Array(typedArray.buffer));
+
+  return heapBytes;
+}
+
+function _freeArray(heapBytes){
+  Module._free(heapBytes.byteOffset);
+}
+
+
+
+function test(){
+ 
+    // Import function from Emscripten generated file
+  float_multiply_array = Module.cwrap(
+    'float_multiply_array', 'number', ['number', 'number', 'number']
+  );
+
+  // Create example data to test float_multiply_array
+  var data = new Float32Array([1, 2, 3, 4, 5]);
+
+
+  var dataHeap = _arrayToHeap(data);
+
+  // Call function and get result
+  float_multiply_array(2, dataHeap.byteOffset, data.length);
+    // float_multiply_array(2, data.buffer, data.length);
+
+  var result = new Float32Array(dataHeap.buffer, dataHeap.byteOffset, dataHeap.length/4);
+  console.log("result", data);
+  console.log("result", dataHeap);
+  console.log("result", result);
+  // Free memory
+  Module._free(dataHeap.byteOffset);
+}
+   
+var Module = { onRuntimeInitialized: test};
+
+  </script>
+  <script src="bin/sum.js"></script>
+
+</html>

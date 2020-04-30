@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <script>
+
+function _arrayToHeap(typedArray){
+  var numBytes = typedArray.length * typedArray.BYTES_PER_ELEMENT;
+  var ptr = Module._malloc(numBytes);
+  var heapBytes = Module.HEAPU8.subarray(ptr, ptr + numBytes);
+  heapBytes.set(typedArray);
+  return heapBytes;
+}
+
+function _freeArray(heapBytes){
+  Module._free(heapBytes.byteOffset);
+}
+
+function test(){
+ 
+  var uint8Array = new Uint8Array(1000);
+  uint8Array.fill(0);
+  uint8Array[0] = 5;
+  
+  var s;
+  uint8Array.fill(1);
+  var heapBytes = _arrayToHeap(uint8Array);
+
+  s = Module.ccall('sum', 'number',['array','number'], [uint8Array, uint8Array.length]); 
+  console.log("CCall sum", s);
+
+  var sum = Module.cwrap('sum', 'number',['array','number']); //, [uint8Array, uint8Array.length]); };
+  s = sum(uint8Array, uint8Array.length);
+  console.log("Cwrap sum", s);
+
+  s = Module._sum(heapBytes.byteOffset, uint8Array.length);
+  console.log("Direct ASMJS call sum", s);
+
+  s = Module.sum_c(uint8Array);
+  console.log("Direct ASMJS call sum via postjs", s);
+
+  s = Module.sum({ length: heapBytes.length, ptr: heapBytes.byteOffset});
+  console.log("Direct Call with span", s);
+
+  console.log('=-=-=-=-=-==-=-=-');
+
+  _freeArray(heapBytes);
+}
+   
+var Module = { onRuntimeInitialized: test};
+
+  </script>
+  <script src="bin/sum.js"></script>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="bin/main.js"></script>
+<script>
+    // Ref Link https://www.codepool.biz/webassembly-standalone-dynamic-linking-wasm.html
+    Module['onRuntimeInitialized'] = onRuntimeInitialized;
+
+    function onRuntimeInitialized() {
+        console.log("Module1", Module._foo1())
+        console.log("Module2", Module._foo2())
+    }
+
+</script>
+</html>

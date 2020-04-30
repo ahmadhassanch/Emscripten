@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="bin/overlay.js"></script>
+<script>
+    // Ref Link https://stackoverflow.com/questions/17883799/how-to-handle-passing-returning-array-pointers-to-emscripten-compiled-code
+    function getSampleFloat32Array(len){
+        var arr = new Float32Array(len);
+        for (var i = 0; i < arr.length; i++)
+            arr[i] = i
+        return arr
+    }
+
+    function f32ArrayToCarray(data){
+        var bytesPerSample = 4;
+        var offset = Module._malloc(data.byteLength)
+        Module.HEAPF32.set(data, offset/bytesPerSample);
+        return offset
+    }
+
+    function cArrayToF32Array(arr){
+        var bytesPerSample = 4;
+        return Module.HEAPF32.subarray(arr.ptr/bytesPerSample, (arr.ptr/bytesPerSample + arr.length));
+    }
+
+
+
+    function onRuntimeInitialized() {
+        let arrLength = 5;
+        var inData1 = getSampleFloat32Array(arrLength)
+        var inData2 = getSampleFloat32Array(arrLength)
+        var outArr = new Float32Array(arrLength)
+
+        inData1.ptr = f32ArrayToCarray(inData1)
+        inData2.ptr = f32ArrayToCarray(inData2);
+        outArr.ptr = f32ArrayToCarray(outArr);
+
+        overlaySound(inData1.ptr, inData2.ptr, outArr.ptr, arrLength)
+
+        var res = cArrayToF32Array(outArr.ptr); //BYTES_PER_ELEMENT
+        console.log(res);
+    }
+
+    const overlaySound = Module.cwrap('overlaySound','number',['number', 'number']) // 2nd way
+    Module['onRuntimeInitialized'] = onRuntimeInitialized;
+
+</script>
+</html>

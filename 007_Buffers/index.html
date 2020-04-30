@@ -36,18 +36,15 @@
     }
 
     var heapBytes = _arrayToHeap(uint8Array);
-
+    var sum = Module.cwrap('sum', 'number',['array','number']);
 
       for (var l = 0; l<20; ++l) {
 
         uint8Array.fill(1);
         measure('01: C sum (ccall):           ', function(){ return Module.ccall('sum', 'number',['array','number'], [uint8Array, uint8Array.length]); });
 
-        // // these do not work - corrupted
-        // uint8Array.fill(2);
-        // measure('02: C sum, buffer:           ', function(){ return Module.ccall('sum', 'number',['array','number'], [uint8Array.buffer, uint8Array.length]); });
-        // uint8Array.fill(3);
-        // measure('03: C sum_c:                 ', function(){ return Module.sum_c(uint8Array); });
+        measure('02: C sum (cwrap):           ', function(){ return sum(uint8Array, uint8Array.length);});
+        measure('03: C sum_c:                 ', function(){ return Module.sum_c(uint8Array); });
 
         // uint8Array.fill(4);
         // measure('04: sum_str_cpy:             ', function(){ return Module.sum_str_cpy(uint8Array); });
@@ -88,6 +85,6 @@
       };
 
   </script>
-  <script src="sum.js"></script>
+  <script src="bin/sum.js"></script>
 
 </html>

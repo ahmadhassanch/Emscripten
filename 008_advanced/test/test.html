@@ -1,0 +1,25 @@
+<script src="../dist/mysqrt.js"></script>
+<script>
+
+function test(){
+
+    console.log("Mysqrt.mysqrt(5):", Mysqrt.mysqrt(5));
+     var handler = Mysqrt.createMyClass();
+    Mysqrt.setMyClassValue(handler, 7);
+    console.log("Mysqrt.getMyClassAnswer(handler):",Mysqrt.getMyClassAnswer(handler));
+    var handler2 = Mysqrt.createMyClass();
+    Mysqrt.setMyClassValue(handler2, 8);
+    console.log("Mysqrt.getMyClassAnswer(handler2):",Mysqrt.getMyClassAnswer(handler2));
+    Mysqrt.setMyClassValue(handler, 9);
+    console.log("Mysqrt.getMyClassAnswer(handler):",Mysqrt.getMyClassAnswer(handler));
+    Mysqrt.deleteMyClass(handler);
+    Mysqrt.deleteMyClass(handler2);
+            // var offset = Module._malloc(5);
+
+    // var v = Mysqrt.mysqrtArray([0,1,2,3,4,5,6]);
+    // console.log("Mysqrt.mysqrtArray([0,1,2,3,4,5,6]):",v);
+
+}
+    var Module = { onRuntimeInitialized: test};
+
+</script>

@@ -1,4 +1,27 @@
 
+
+WASMER:  Webassembly runtime support for running wasm files.
+============================================================
+curl https://get.wasmer.io -sSfL | sh
+
+
+The Malloc in 008_advanced is not working. Whereas, it is working in 010 as well as 007 codes
+IMportant, removing -02 create further problems. 
+My hunch is that pre and post js are causing problem.
+
+
+GOOOD
+https://book.comptechs.cn/cppwasm-by-3dgen/en/ch2-c-js/ch2-04-data-exchange.html
+
+
+https://kapadia.github.io/emscripten/2013/09/13/emscripten-pointers-and-pointers.html
+
+https://stackoverflow.com/questions/51973627/webassembly-missing-free-function-cannot-free-memory
+Run test examples.
+https://github.com/DanRuta/wasm-arrays
+https://becominghuman.ai/passing-and-returning-webassembly-array-parameters-a0f572c65d97
+https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts
+
 Question'
 ===========
 - We want that we don't need to change any C code

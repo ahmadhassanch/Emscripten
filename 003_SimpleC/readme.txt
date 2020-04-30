@@ -27,12 +27,4 @@ Note that we need to add the following line:
 - and the start function can now use the module functions (which were exported via EMSCRIPTEN_BINDINGS)
 
 
-CONFIRM THE FOLLOWING:
-======================
-- Uptil now we are using small C code so that can be loaded in main thread. Later we will use web workers.
 
-
-Question'
-===========
-- We want that we don't need to change any C code
-- we want to call the functions/ classes directly without using Module.
