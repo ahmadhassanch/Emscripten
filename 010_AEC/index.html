@@ -9,7 +9,6 @@
 </body>
 <script src="bin/overlay.js"></script>
 <script>
-    // Ref Link https://stackoverflow.com/questions/17883799/how-to-handle-passing-returning-array-pointers-to-emscripten-compiled-code
     function getSampleFloat32Array(len){
         var arr = new Float32Array(len);
         for (var i = 0; i < arr.length; i++)
@@ -29,8 +28,6 @@
         return Module.HEAPF32.subarray(arr.ptr/bytesPerSample, (arr.ptr/bytesPerSample + arr.length));
     }
 
-
-
     function onRuntimeInitialized() {
         let arrLength = 5;
         var inData1 = getSampleFloat32Array(arrLength)
@@ -43,8 +40,12 @@
 
         overlaySound(inData1.ptr, inData2.ptr, outArr.ptr, arrLength)
 
-        var res = cArrayToF32Array(outArr); //BYTES_PER_ELEMENT
+        var res = cArrayToF32Array(outArr); 
         console.log(res);
+
+        var addr1 = Module._getAddr();
+        console.log(addr1);
+        var addr2 = Module._printVal(addr1);
     }
 
     const overlaySound = Module.cwrap('overlaySound','number',['number', 'number']) // 2nd way
