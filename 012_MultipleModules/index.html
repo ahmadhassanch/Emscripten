@@ -20,7 +20,7 @@
     function onRuntimeInitialized1() {
         console.log("Module1", mod1._foo1())
         // console.log("Module2", mod1._foo2())
-			console.log(mod2.dd);
+			console.log(mod2.dd());
     }
 var mod1 = Module1();
 mod1['onRuntimeInitialized'] = onRuntimeInitialized1;
