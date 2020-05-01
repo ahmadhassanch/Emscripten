@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="bin/foo1.js"></script>
+<script src="bin/foo2.js"></script>
+<script>
+    // Ref Link https://www.codepool.biz/webassembly-standalone-dynamic-linking-wasm.html
+    // Module['onRuntimeInitialized'] = onRuntimeInitialized;
+    function onRuntimeInitialized2() {
+        console.log("Module1", mod2._foo2())
+        // console.log("Module2", mod1._foo2())
+    }
+
+    function onRuntimeInitialized1() {
+        console.log("Module1", mod1._foo1())
+        // console.log("Module2", mod1._foo2())
+    }
+var mod1 = Module1();
+mod1['onRuntimeInitialized'] = onRuntimeInitialized1;
+
+var mod2 = Module2();
+mod2['onRuntimeInitialized'] = onRuntimeInitialized2;
+
+</script>
+</html>

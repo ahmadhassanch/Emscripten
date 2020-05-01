@@ -13,7 +13,7 @@ My hunch is that pre and post js are causing problem.
 GOOOD
 https://book.comptechs.cn/cppwasm-by-3dgen/en/ch2-c-js/ch2-04-data-exchange.html
 
-
+Good
 https://kapadia.github.io/emscripten/2013/09/13/emscripten-pointers-and-pointers.html
 
 https://stackoverflow.com/questions/51973627/webassembly-missing-free-function-cannot-free-memory
